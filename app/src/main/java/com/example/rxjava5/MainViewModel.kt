@@ -1,20 +1,36 @@
 package com.example.rxjava5
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import com.example.rxjava5.data.ManagerEntity
-import com.example.rxjava5.domain.Manager
-
+import androidx.lifecycle.*
+import com.example.rxjava5.data.PersonEntity
+import com.example.rxjava5.domain.Person
 
 class MainViewModel: ViewModel() {
 
-    var managerEntityLiveData = MutableLiveData<ManagerEntity>().apply {
-        postValue(ManagerEntity(1, "Top Manager"))
-    }
-    lateinit var managerDomainLiveData : MutableLiveData<Manager>
 
-    var managerDomainLiveData = MutableLiveData<Manager>()Transformations.map(managerEntityLiveData, {
-    })
+    private val personEntity = MutableLiveData<PersonEntity>()
+    private val personDomain : LiveData<Person> = Transformations.map<PersonEntity, Person>(personEntity,::conversionData)
+
+    private fun conversionData(personEntity: PersonEntity): Person =
+        if (personEntity.id == null) {
+            Person(0, "")
+        }else{
+            Person(personEntity.id, personEntity.name)
+        }
+
+    fun getPersonDomain() : LiveData<Person> {
+        return personDomain
+    }
+
+    fun setPersonEntity(personEntity: PersonEntity) : MainViewModel =
+        //This will be use for the back end like calling retrofit data or
+        apply {
+            this.personEntity.setValue(personEntity)
+        }
 
 }
+
+
+class PersonEntityMapper(){
+
+}
+
