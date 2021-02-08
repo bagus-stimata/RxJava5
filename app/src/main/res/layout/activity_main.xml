@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.23"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -36,11 +37,24 @@
                 android:layout_height="5dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textResult"
+                android:id="@+id/textResultMap"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@{viewModel.personDomain.name}"
+                android:textColor="@android:color/holo_red_dark"
+                tools:text="Data Request from the back end"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textResultSwitchMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{viewModel.personItem.name}"
                 android:textColor="@android:color/holo_red_dark"
                 tools:text="Data Request from the back end"/>
 

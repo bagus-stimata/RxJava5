@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.rxjava5.data.PersonEntity
 import com.example.rxjava5.databinding.MainBinder
 import com.example.rxjava5.domain.Person
+import com.example.rxjava5.presentation.PersonItem
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,9 +43,16 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getPersonDomain().observe(this, object : Observer<Person> {
             override fun onChanged(person: Person) {
-                binding.textResult.text = person.name
+                binding.textResultMap.text = "${person.name} -> ${person.manager.name}"
             }
         })
+
+        viewModel.getPersonItem().observe(this, object : Observer<PersonItem> {
+            override fun onChanged(personItem: PersonItem) {
+                binding.textResultSwitchMap.text = personItem.name
+            }
+        })
+
     }
 
 
